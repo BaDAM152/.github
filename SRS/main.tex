@@ -1,0 +1,363 @@
+% main.tex
+% https://www.overleaf.com/8524532369xzdjrdytffyx#f690f0
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{cite}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[width=0.05\textwidth]{assets/college-logo.png}}
+\rhead{\textit{SRS Document}}
+\lfoot{\includegraphics[width=0.05\textwidth]{assets/logo-beta.jpg}\textit{ Hukum}}
+\rfoot{\thepage}
+
+\title{
+    \begin{figure}[h!]
+        \centering
+        \raisebox{0.2cm}{\includegraphics[height=2cm]{assets/college.png}}
+        \hspace{1cm}
+        \includegraphics[height=2cm]{assets/logo-beta.jpg}
+    \end{figure}
+
+    \large \textbf{Indian Institute of Information Technology, Dharwad}\\
+    \textbf{Software Requirement and Technical Feasibility Document}\\
+    \vspace{0.5cm}
+    \large \textbf{\textit{CS310}}: Software Engineering Project
+}
+
+\author{
+    Prepared by: Team \textbf{Hukum}\\
+    Group Members: \\[1em]
+    \begin{tabular}{ll}
+        Amritanshu Aditya & \textit{23bcs013} \\
+        Barghav Abhilash B R & \textit{23bcs028} \\
+        Dhruv A. Koli & \textit{23bcs044} \\
+        K V Modak & \textit{23bcs067} \\
+    \end{tabular}\\[2em]
+    Faculty Advisor: \\
+    Dr. Vivekraj V K\thanks{Dept. of Computer Science, IIIT Dharwad}\\ \\
+    note\thanks{\textbf{\textit{This is not the official documentation of our product.}}}
+}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\subsection{The Problem Statement}
+\subsubsection{The Traditional Attendance Procedure}
+
+\begin{itemize}
+    \item Current methods are time-consuming and prone to human error.
+    \item Manual entry increases the administrative workload for faculty.
+\end{itemize}
+
+\subsubsection{Hardware Dependency}
+
+\begin{itemize}
+    \item Existing automated systems often require expensive hardware, such as biometric devices or card readers.
+    \item High hardware costs make these systems less accessible to many institutions.
+\end{itemize}
+
+\subsubsection{Proxy Attendance}
+
+\begin{itemize}
+    \item Traditional systems, both manual and some automated, allow for proxy attendance, compromising the accuracy of attendance records.
+\end{itemize}
+
+\subsubsection{Data Management Challenges}
+
+\begin{itemize}
+    \item Manually maintaining attendance records can lead to inconsistency and data loss.
+    \item Retrieval and analysis of attendance data are cumbersome in traditional systems.
+\end{itemize}
+
+\subsubsection{Scalability Issues}
+
+\begin{itemize}
+    \item Many current systems are not scalable to accommodate larger class sizes or multiple sessions without additional resources.
+\end{itemize}
+
+\subsubsection{User Experience}
+
+\begin{itemize}
+    \item Complexity in using some existing systems can deter users, reducing system adoption and efficiency.
+    \item Maintenance of these systems can also be challenging and resource-intensive.
+\end{itemize}
+
+\subsection{Our Approach}
+
+We solve this issue by leveraging image recognition for identifying the students for attendance.
+We also involved automation of attendance marking system to reduce manual work for all parties involved in this.
+
+\subsection{What the customer wants?}
+
+\subsubsection{Cost-effective Attendance System}
+
+\begin{itemize}
+    \item A system designed to minimize expenses while efficiently marking attendance.
+\end{itemize}
+
+\subsubsection{Reduced Time for Marking Attendance}
+
+\begin{itemize}
+    \item The purpose of this project is to streamline and expedite the attendance process, saving valuable time.
+\end{itemize}
+
+\subsubsection{Minimized Proxies}
+
+\begin{itemize}
+    \item Implement measures to significantly reduce the incidence of proxy attendance.
+\end{itemize}
+
+\subsubsection{Ease of Use and Better Maintainability}
+
+\begin{itemize}
+    \item Ensure that the system is user-friendly and easy to maintain, promoting long-term usability.
+\end{itemize}
+
+\subsection{Objectives}
+
+Our approach to creating an efficient attendance marking system is clear and practical. The main objectives are as follows.
+
+\subsubsection{Cost Efficiency}
+
+\begin{itemize}
+    \item Most automated attendance systems require significant hardware investments.
+    \item Our model provides a cost-efficient solution that is entirely software-based.
+    \item Using image recognition and automation, we eliminate hardware costs by leveraging open-source libraries to achieve the desired results.
+\end{itemize}
+
+\subsubsection{Minimized Proxies}
+
+\begin{itemize}
+    \item Both manual and automated systems often have a margin of error, allowing proxies.
+    \item Our solution addresses this by requiring students to physically be present in the classroom.
+    \item Faculty members take images as evidence, which are used for image recognition.
+    \item This ensures that proxies are nearly impossible, as the process depends entirely on the faculty's timing to capture and upload images.
+\end{itemize}
+
+\subsubsection{Automation}
+
+\begin{itemize}
+    \item Image recognition is the foundation of our system.
+    \item The system automatically generates attendance records for sessions conducted by faculty.
+    \item All attendance data is logged into a web portal accessible to administrators, students, and faculty.
+\end{itemize}
+
+\subsubsection{Ease of Use and Maintenance}
+
+\begin{itemize}
+    \item Our system is designed to be user-friendly and maintainable.
+    \item The web portal provides easy access to all required data for clients, students, and faculty, ensuring convenience and compliance.
+\end{itemize}
+
+\subsubsection{Scalability}
+
+\begin{itemize}
+    \item The system is scalable to accommodate the entire class of 70 students.
+    \item Tests have shown that our image recognition model can accurately identify faces with over 66\%\ accuracy for a single column of students in the classroom. Check references.
+\end{itemize}
+
+\section{Software Requirements}
+\subsection{Basic Requirements}
+\subsubsection{Scope}
+\begin{itemize}
+    \item The software should be such that it allows the instructor of the course to access and manage the attendance of all students in their class. 
+    \item The software should allow students to see which classes they have been marked as present and which classes they have missed for all subjects in their particular semester.
+    \item After marking attendance for a class, the software should have a feedback system for the students that would let them know that they have been marked present or absent in the attendance database.
+    \item The software should have great precision in recognizing students and should have minimal or no mismatches.
+    \item In the rare case of mis-detection, the software should allow the course instructor to edit and update attendance for the missed person, provided that the aggrieved student approaches them within a reasonable time.
+\end{itemize}
+
+\subsubsection{Budget}
+\begin{itemize}
+    \item The project requires minimal investment. The training database will consist of photos of the students, which the software can map to photos taken in class for attendance marking. 
+    \item Photos that will be uploaded daily will be stored on an on-line server that handles File Transfer Protocol (FTP). The database will request an API from this server to access those images and mark attendance for the students.
+\end{itemize}
+
+\subsubsection{Time}
+\begin{itemize}
+    \item Data Training and Data Collection: 3 to 4 weeks
+    \item Development: 8 to 9 weeks
+    \item Testing (Phase-wise testing and final testing): 2 to 3 weeks
+\end{itemize}
+
+\subsection{HLD}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]{assets/HLD_version19jan.excalidraw.png}
+    \caption{HLD}
+    \label{fig:hld_diagram}
+\end{figure}
+
+
+\newpage
+
+\section{Technical Feasibility}
+\subsection{Feasibility Analysis}
+\subsubsection{Data Collection and Training}
+\begin{itemize}
+    \item Collection of adequate face data for all students.
+    \item Training the face recognition model to recognize on the basis of the training data.
+    \item Testing the system using varying light and occlusions.
+    \item Can be done using pre-trained models such as \textbf{FaceNet} and \textbf{DeepFace} as well.
+\end{itemize}
+
+\subsubsection{Platform for customer}
+\begin{itemize}
+    \item A web platform where user provides photos as input.
+    \item Photos can be uploaded or taken live. However, the one with easier functionality for the user and the one that is less error-prone may be implemented.
+    \item The photos are taken column-wise, ensuring that everyone's face is properly visible.
+    \item One class will generate an input of 4 photos, 1 of each column. 
+\end{itemize}
+
+\subsubsection{Processing of Images}
+\begin{itemize}
+    \item Includes \begin{itemize}
+        \item Face Detection
+        \item Face Recognition
+        \item Mapping of records
+    \end{itemize}
+    \item The images are processed via the backend which is trained upon the training image data.
+\end{itemize}
+
+\subsubsection{Feedback}
+\begin{itemize}
+    \item Students receive an email notification regarding their attendance status for the class.
+    \item In any rare case of face mismatch, manual overriding of records is possible.
+\end{itemize}
+
+\subsubsection{Monitoring}
+\begin{itemize}
+    \item The attendance database are constantly monitored by our developers who oath to work honestly in the surveillance of the records.
+    \item Helps reduce any potential discrepancies and aids in the further scalability of the product.
+\end{itemize}
+
+\subsection{Cost \& Benefit Analysis}
+\subsubsection{Cost Analysis}
+\begin{itemize}
+    \item Storage requirements for new photos.
+    \item Backup photos for a period of two weeks in case of discrepancies.
+    \item A working camera phone.
+\end{itemize}
+\subsubsection{Benefit Analysis}
+\begin{itemize}
+    \item Time and Cost efficient.
+    \item Almost negligible proxies.
+    \item More hassle free for students and faculty.
+    \item Students get the access to their attendance records 24/7 anywhere from the world.
+\end{itemize}
+
+\subsection{Technology Stack}
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|p{0.2\textwidth}|p{0.35\textwidth}|p{0.35\textwidth}|}
+\hline
+\textbf{Component} & \textbf{Primary Options} & \textbf{Alternative Options} \\
+\hline\hline
+
+\multirow{1}{*}{\textit{Frontend}} & 
+React.js with TS / JS & 
+Vue.js with TS \& Vuetify \\
+\hline
+
+\multirow{1}{*}{\textit{UI Components}} & 
+Shadcn/ui, Tailwind CSS & 
+UnoCSS \\
+\hline
+
+\multirow{1}{*}{\textit{Backend API}} & 
+FastAPI, Python 3.9+ & 
+Django REST, Flask \\
+\hline
+
+\multirow{1}{*}{\textit{Face Recognition}} & 
+OpenCV, face\_recognition & 
+DeepFace, MediaPipe(Google) \\
+\hline
+
+\multirow{1}{*}{\textit{Database}} & 
+PostgreSQL, SQLite (for local testing) & 
+Redis (Caching/Session), MongoDB \\
+\hline
+
+\multirow{1}{*}{\textit{Storage}} & 
+Google Drive API, Local Storage & 
+Amazon S3 (free tier) \\
+\hline
+
+\multirow{1}{*}{\textit{Email Service}} & 
+SMTP (Python smtplib) & SendGrid (free tier) \\
+\hline
+
+\multirow{1}{*}{\textit{Testing}} &
+pytest, integration tests & ||||||||||||| \\
+\hline
+
+\multirow{1}{*}{\textit{Dev Tooling}} &
+DevLogs, Documentation, GIT VCS & Code Linting \\
+\hline
+
+\multirow{1}{*}{\textit{Deployment}} & 
+Heroku (free tier), Vercel & 
+Docker, Netlify \\
+\hline
+
+\multirow{1}{*}{\textit{Monitoring}} & 
+Basic Python logging & 
+Sentry (for error tracking) \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{thebibliography}{9}
+
+\bibitem{opencv} 
+Bradski, G., \textit{The OpenCV Library}, Dr. Dobb's Journal of Software Tools, 2000. \url{https://opencv.org/}.
+
+\bibitem{face_recognition_python} 
+Adam Geitgey, \textit{Face Recognition with Python}, 2018, \url{https://github.com/ageitgey/face_recognition}.
+
+\bibitem{yt}
+SmartPencs, \textit{Attendance Management System Using Face Recognition} Live Face Detection without face recognition \url{https://rb.gy/kelprs}.
+
+\bibitem{HLD}
+Excalidraw, \textit{High Level Design for Project} Whiteboard tool that lets you easily sketch diagrams
+\url{https://excalidraw.com} \& \url{https://libraries.excalidraw.com/}.
+
+\bibitem{FTP}
+File Transfer Protocol, Useful in handling file (image) receive and send operations between server and face recognition code.
+\url{https://en.wikipedia.org/wiki/File_Transfer_Protocol}
+
+\bibitem{Google Drive API}
+Google Drive API, \textit{Google Drive API for file upload and downloads} 
+
+\bibitem{benchmark} 
+OpenCV claims a successful match of faces with a score more than 66\%.
+
+\end{thebibliography}
+
+\vspace{400pt}
+\textit{A document created using} \LaTeX ||||||||||||||| \date{\today}
+ 
+\end{document}
+
